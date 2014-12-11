@@ -806,7 +806,7 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
         }
     };
 
-    $scope.registerDevice = function(id) {
+    $scope.registerDevice = function() {
         alert("called registerDevice!");
         var thePlayer = interComService.getUser();
         var regObj = [{
@@ -814,10 +814,11 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
                 myPlayerId: thePlayer.myPlayerId,
                 accessSignature: thePlayer.accessSignature,
                 gameId: interComService.getGame().gameId,
-                registrationId: id,
+                registrationId: $scope.regid,
                 platformType: "ANDROID"
             }
         }];
+        alert(thePlayer.myPlayerId + " " + thePlayer.accessSignature + " " + interComService.getGame().gameId + " " + $scope.regid);
         sendServerMessage('REGISTER_DEVICE', regObj);
     }
     
