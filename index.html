@@ -95,7 +95,7 @@
             document.getElementById("regIdTextarea").value = e.regid;
             window.regid = e.regid;
             $scope.regid = e.regid;
-            $apply(registerDevice());
+            $apply(registerDevice(e.regid));
           }
         break;
           case 'message':
