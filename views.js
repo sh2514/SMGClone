@@ -781,7 +781,10 @@ myApp.controller('resultsCtrl', function ($routeParams, $location, $scope, $root
 myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootScope, $log, $window, platformMessageService, stateService, serverApiService, platformScaleService, interComService) {
     this.name = "pushCtrl";
 
+    $scope.regid;
+
     $rootScope.pushSomeEvent = function () {
+        alert('Called pushSomeEvent!');
         $log.info("Called pushSomeEvent");
         $scope.$emit('pushEvent');
     }
@@ -789,5 +792,32 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
     $rootScope.$on('pushEvent', function (event) {
         $log.info("PUSH EVENT IN PUSHCTRL");
     });
+
+    function sendServerMessage(t, obj) {
+        var type = t;
+        serverApiService.sendMessage(obj, function (response) {
+            processServerResponse(type, response);
+        });
+    };
+
+    function processServerResponse(type, resObj) {
+        if (type === 'REGISTER_DEVICE') {
+            alert("REGISTRATION SUCCESS for " + $scope.regid);
+        }
+    }
+
+    $scope.registerDevice = function() {
+        alert("called registerDevice!");
+        var thePlayer = interComService.getUser();
+        var regObj = [{
+            registerForPushNotifications: {
+                accessSignature: thePlayer.accessSignature,
+                gameId: interComService.getGame().gameId,
+                myPlayerId: thePlayer.myPlayerId,
+                registrationId: $scope.regid;
+            }
+        }];
+        sendServerMessage('REGISTER_DEVICE', regObj);
+    }
 
 });
