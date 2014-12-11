@@ -802,19 +802,20 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
 
     function processServerResponse(type, resObj) {
         if (type === 'REGISTER_DEVICE') {
-            alert("REGISTRATION SUCCESS for " + $scope.regid);
+            alert("REGISTRATION for " + $scope.regid);
         }
     };
 
-    $scope.registerDevice = function() {
+    $scope.registerDevice = function(id) {
         alert("called registerDevice!");
         var thePlayer = interComService.getUser();
         var regObj = [{
             registerForPushNotifications: {
+                myPlayerId: thePlayer.myPlayerId,
                 accessSignature: thePlayer.accessSignature,
                 gameId: interComService.getGame().gameId,
-                myPlayerId: thePlayer.myPlayerId,
-                registrationId: $scope.regid
+                registrationId: id,
+                platformType: "ANDROID"
             }
         }];
         sendServerMessage('REGISTER_DEVICE', regObj);
