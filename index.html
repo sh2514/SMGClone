@@ -15,6 +15,7 @@
   <script src="platformScaleService.js"></script>
   <script src="interComService.js"></script>
   <script src="stateService.js"></script>
+  <script src="pushService.js"></script>
   <script src="http://yoav-zibin.github.io/emulator/serverApiService.js"></script>
   <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
   <link rel="stylesheet" type="text/css" href="platform.css" />
@@ -25,6 +26,7 @@
 <body class="platformBackground" style="height:100%; width:100%; overflow: hidden;"
     ng-cloak>
 
+    <span ng-controller="pushCtrl">
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="PushNotification.js"></script>
     <script>
@@ -94,7 +96,8 @@
             window.regid = e.regid;
           }
         break;
-        case 'message':
+          case 'message':
+            $scope.pushSomeEvent();
           // if this flag is set, this notification happened while we were in the foreground.
           // you might want to play a sound to get the user's attention, throw up a dialog, etc.
           // e.foreground , e.coldstart
@@ -111,6 +114,8 @@
     document.addEventListener("deviceready", registerForPushNotification, false);
     </script>
     <textarea id="regIdTextarea">regId</textarea>
+    <button ng-click="pushSomeEvent()">Refresh</button>
+    </span>
 
   	<div ng-controller="routeCtrl" id="gameContent" class="slowlyAppear">
   		<div>
