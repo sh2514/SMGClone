@@ -804,7 +804,7 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
         if (type === 'REGISTER_DEVICE') {
             alert("REGISTRATION SUCCESS for " + $scope.regid);
         }
-    }
+    };
 
     $scope.registerDevice = function() {
         alert("called registerDevice!");
@@ -814,10 +814,10 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
                 accessSignature: thePlayer.accessSignature,
                 gameId: interComService.getGame().gameId,
                 myPlayerId: thePlayer.myPlayerId,
-                registrationId: $scope.regid;
+                registrationId: $scope.regid
             }
         }];
         sendServerMessage('REGISTER_DEVICE', regObj);
     }
-
+    
 });
