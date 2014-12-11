@@ -781,7 +781,7 @@ myApp.controller('resultsCtrl', function ($routeParams, $location, $scope, $root
 myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootScope, $log, $window, platformMessageService, stateService, serverApiService, platformScaleService, interComService) {
     this.name = "pushCtrl";
 
-    $scope.regid;
+    $rootScope.regid;
 
     $rootScope.pushSomeEvent = function () {
         alert('Called pushSomeEvent!');
@@ -802,7 +802,7 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
 
     function processServerResponse(type, resObj) {
         if (type === 'REGISTER_DEVICE') {
-            alert("REGISTRATION for " + $scope.regid);
+            alert("REGISTRATION for " + $rootScope.regid);
         }
     };
 
@@ -814,11 +814,11 @@ myApp.controller('pushCtrl', function ($routeParams, $location, $scope, $rootSco
                 myPlayerId: thePlayer.myPlayerId,
                 accessSignature: thePlayer.accessSignature,
                 gameId: interComService.getGame().gameId,
-                registrationId: $scope.regid,
+                registrationId: $rootScope.regid,
                 platformType: "ANDROID"
             }
         }];
-        alert(thePlayer.myPlayerId + " " + thePlayer.accessSignature + " " + interComService.getGame().gameId + " " + $scope.regid);
+        alert(thePlayer.myPlayerId + " " + thePlayer.accessSignature + " " + interComService.getGame().gameId + " " + $rootScope.regid);
         sendServerMessage('REGISTER_DEVICE', regObj);
     }
     
