@@ -347,7 +347,7 @@ myApp.controller('gameCtrl',
     $scope.avatarImageUrl = thePlayer.avatarImageUrl;
     $scope.thePlayer = angular.toJson(thePlayer);
     $scope.theGame = angular.toJson(theGame);
-    $scope.regid;
+    $rootScope.regid;
     var myLastMove;
     var myTurnIndex = 0;
     var numOfMove = 0;
@@ -701,7 +701,7 @@ myApp.controller('gameCtrl',
                 myPlayerId: thePlayer.myPlayerId,
                 accessSignature: thePlayer.accessSignature,
                 gameId: interComService.getGame().gameId,
-                registrationId: $scope.regid,
+                registrationId: $rootScope.regid,
                 platformType: "ANDROID"
             }
         }];
@@ -711,13 +711,13 @@ myApp.controller('gameCtrl',
 
     // Handles the pushed notifications from servers
     function successHandler (result) {
-      $info.log('result = ' + result);
+      alert('result = ' + result);
     }
     function errorHandler (error) {
-      $info.log('error = ' + error);
+      alert('error = ' + error);
     }
     function registerForPushNotification() {
-      $info.log('registerForPushNotification for cordova.platformId:' + cordova.platformId);
+      alert('registerForPushNotification for cordova.platformId:' + cordova.platformId);
       var pushNotification = window.plugins.pushNotification;
       if ( cordova.platformId == 'android' || cordova.platformId == 'Android' || cordova.platformId == "amazon-fireos" ){
         pushNotification.register(
@@ -764,18 +764,22 @@ myApp.controller('gameCtrl',
     }
     // Android and Amazon Fire OS
     window.onNotification = function (e) {
+      alert('RECEIVED:' + JSON.stringify(e));
       switch( e.event )
       {
         case 'registered':
           if ( e.regid.length > 0 )
           {
             // Your GCM push server needs to know the regID before it can push to this device
+            alert('REGID:' + e.regid);
+            document.getElementById("regIdTextarea").value = e.regid;
             window.regid = e.regid;
-            $scope.regid = e.regid;
+            $rootScope.regid = e.regid;
             registerDevice();
           }
         break;
           case 'message':
+            alert('A MESSAGE NOTIFICATION IS RECEIVED!!!');
             checkGameUpdates();
           // if this flag is set, this notification happened while we were in the foreground.
           // you might want to play a sound to get the user's attention, throw up a dialog, etc.
