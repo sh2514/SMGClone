@@ -754,7 +754,7 @@ myApp.controller('gameCtrl',
         break;
           case 'message':
             alert('A MESSAGE NOTIFICATION IS RECEIVED!!!');
-            $apply(pushSomeEvent());
+            $rootScope.pushSomeEvent();
           // if this flag is set, this notification happened while we were in the foreground.
           // you might want to play a sound to get the user's attention, throw up a dialog, etc.
           // e.foreground , e.coldstart          // e.soundname || e.payload.sound
