@@ -705,19 +705,18 @@ myApp.controller('gameCtrl',
                 platformType: "ANDROID"
             }
         }];
-        alert(thePlayer.myPlayerId + " " + thePlayer.accessSignature + " " + interComService.getGame().gameId + " " + $scope.regid);
         sendServerMessage('REGISTER_DEVICE', regObj);
     }
 
     // Handles the pushed notifications from servers
     function successHandler (result) {
-      alert('result = ' + result);
+      $log.info('result = ' + result);
     }
     function errorHandler (error) {
-      alert('error = ' + error);
+      $log.info('error = ' + error);
     }
     function registerForPushNotification() {
-      alert('registerForPushNotification for cordova.platformId:' + cordova.platformId);
+      $log.info('registerForPushNotification for cordova.platformId:' + cordova.platformId);
       var pushNotification = window.plugins.pushNotification;
       if ( cordova.platformId == 'android' || cordova.platformId == 'Android' || cordova.platformId == "amazon-fireos" ){
         pushNotification.register(
@@ -764,22 +763,21 @@ myApp.controller('gameCtrl',
     }
     // Android and Amazon Fire OS
     window.onNotification = function (e) {
-      alert('RECEIVED:' + JSON.stringify(e));
+      $log.info('RECEIVED:' + JSON.stringify(e));
       switch( e.event )
       {
         case 'registered':
           if ( e.regid.length > 0 )
           {
             // Your GCM push server needs to know the regID before it can push to this device
-            alert('REGID:' + e.regid);
-            document.getElementById("regIdTextarea").value = e.regid;
+            $log.info('REGID:' + e.regid);
             window.regid = e.regid;
             $rootScope.regid = e.regid;
             registerDevice();
           }
         break;
           case 'message':
-            alert('A MESSAGE NOTIFICATION IS RECEIVED!!!');
+            $log.info('A MESSAGE NOTIFICATION IS RECEIVED!!!');
             checkGameUpdates();
           // if this flag is set, this notification happened while we were in the foreground.
           // you might want to play a sound to get the user's attention, throw up a dialog, etc.
