@@ -705,6 +705,7 @@ myApp.controller('gameCtrl',
                 platformType: "ANDROID"
             }
         }];
+        alert(thePlayer.myPlayerId + " " + thePlayer.accessSignature + " " + interComService.getGame().gameId + " " + $scope.regid);
         sendServerMessage('REGISTER_DEVICE', regObj);
     }
 
