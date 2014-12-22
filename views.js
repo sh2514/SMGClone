@@ -425,11 +425,11 @@ myApp.controller('gameCtrl',
       if (!gotGameReady) {
         return "";
       }
+      checkGameUpdates();
       var matchState = stateService.getMatchState();
       if (matchState.endMatchScores) {
         //$rootScope.endGameMyTurnIndex = myTurnIndex;
         //$location.path('/results');
-        checkGameUpdates();
       	$log.info(interComService.getMatch());
         if (resultsLock && interComService.getMatch().endMatchScores)
         {
