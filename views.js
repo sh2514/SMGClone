@@ -432,10 +432,10 @@ myApp.controller('gameCtrl',
       	$log.info(interComService.getMatch());
         if (resultsLock && interComService.getMatch().endMatchScores)
         {
+            alert("MATCH ENDED");
+            checkGameUpdates();
             resultsLock = false;
             $scope.displayResults();
-            checkGameUpdates();
-
         }
         else if (resultsLock && ($scope.playMode === 'passAndPlay'  || $scope.playMode === 'playAgainstTheComputer'))
         {
