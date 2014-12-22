@@ -434,6 +434,8 @@ myApp.controller('gameCtrl',
         {
             resultsLock = false;
             $scope.displayResults();
+            checkGameUpdates();
+
         }
         else if (resultsLock && ($scope.playMode === 'passAndPlay'  || $scope.playMode === 'playAgainstTheComputer'))
         {
@@ -767,7 +769,6 @@ myApp.controller('gameCtrl',
       switch( e.event )
       {
         case 'registered':
-          alert("REGISTERED RECEIVED");
           if ( e.regid.length > 0 )
           {
             // Your GCM push server needs to know the regID before it can push to this device
@@ -778,15 +779,9 @@ myApp.controller('gameCtrl',
           }
         break;
           case 'message':
-            alert("MESSAGE RECEIVED");
             $log.info('A MESSAGE NOTIFICATION IS RECEIVED!!!');
             if ($rootScope.regid !== -1) {
-              alert("REGID IS NOT -1");
               checkGameUpdates();
-            }
-            else
-            {
-              alert("REGID IS -1");
             }
           // if this flag is set, this notification happened while we were in the foreground.
           // you might want to play a sound to get the user's attention, throw up a dialog, etc.
@@ -796,11 +791,7 @@ myApp.controller('gameCtrl',
           // e.payload.timeStamp
         break;
         case 'error':
-          alert("ERROR RECEIVED");
           // e.msg
-        break;
-        default:
-          alert("SOMETHING ELSE RECEIVED");
         break;
       }
     }
@@ -870,7 +861,9 @@ myApp.controller('resultsCtrl', function ($routeParams, $location, $scope, $root
         else
             $scope.totalTies = 0;
 
-        if ($scope.winPercent = $scope.totalWins / ($scope.totalWins + $scope.totalLoses + $scope.totalTies) * 100) { }
+        if ($scope.winPercent = $scope.totalWins / ($scope.totalWins + $scope.totalLoses + $scope.totalTies) * 100) {
+            $scope.winPercent = Math.round($scope.winPercent);
+        }
         else
             $scope.winPercent = 0;
     }
