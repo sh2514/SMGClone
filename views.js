@@ -432,7 +432,6 @@ myApp.controller('gameCtrl',
       	$log.info(interComService.getMatch());
         if (resultsLock && matchState.endMatchScores)
         {
-            alert("MATCH ENDED");
             resultsLock = false;
             $scope.displayResults();
         }
