@@ -429,11 +429,11 @@ myApp.controller('gameCtrl',
       if (matchState.endMatchScores) {
         //$rootScope.endGameMyTurnIndex = myTurnIndex;
         //$location.path('/results');
+        checkGameUpdates();
       	$log.info(interComService.getMatch());
         if (resultsLock && interComService.getMatch().endMatchScores)
         {
             alert("MATCH ENDED");
-            checkGameUpdates();
             resultsLock = false;
             $scope.displayResults();
         }
