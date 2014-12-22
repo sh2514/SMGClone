@@ -347,7 +347,7 @@ myApp.controller('gameCtrl',
     $scope.avatarImageUrl = thePlayer.avatarImageUrl;
     $scope.thePlayer = angular.toJson(thePlayer);
     $scope.theGame = angular.toJson(theGame);
-    $rootScope.regid;
+    $rootScope.regid = -1;
     var myLastMove;
     var myTurnIndex = 0;
     var numOfMove = 0;
@@ -780,7 +780,14 @@ myApp.controller('gameCtrl',
           case 'message':
             alert("MESSAGE RECEIVED");
             $log.info('A MESSAGE NOTIFICATION IS RECEIVED!!!');
-            checkGameUpdates();
+            if ($rootScope.regid !== -1) {
+              alert("REGID IS NOT -1");
+              checkGameUpdates();
+            }
+            else
+            {
+              alert("REGID IS -1");
+            }
           // if this flag is set, this notification happened while we were in the foreground.
           // you might want to play a sound to get the user's attention, throw up a dialog, etc.
           // e.foreground , e.coldstart          // e.soundname || e.payload.sound
