@@ -767,6 +767,7 @@ myApp.controller('gameCtrl',
       switch( e.event )
       {
         case 'registered':
+          alert("REGISTERED RECEIVED");
           if ( e.regid.length > 0 )
           {
             // Your GCM push server needs to know the regID before it can push to this device
@@ -777,6 +778,7 @@ myApp.controller('gameCtrl',
           }
         break;
           case 'message':
+            alert("MESSAGE RECEIVED");
             $log.info('A MESSAGE NOTIFICATION IS RECEIVED!!!');
             checkGameUpdates();
           // if this flag is set, this notification happened while we were in the foreground.
@@ -787,7 +789,11 @@ myApp.controller('gameCtrl',
           // e.payload.timeStamp
         break;
         case 'error':
+          alert("ERROR RECEIVED");
           // e.msg
+        break;
+        default:
+          alert("SOMETHING ELSE RECEIVED");
         break;
       }
     }
