@@ -110,30 +110,6 @@ myApp.controller('loginCtrl', function($routeParams, $location, $interval, $scop
     }
   }
 
-  function getJsonFromUrl() {
-      if (!location.search || location.search == "") {
-          return {};
-      }
-      var query = location.search.substr(1);
-      var result = {};
-      query.split("&").forEach(function (part) {
-          var item = part.split("=");
-          result[item[0]] = decodeURIComponent(item[1]);
-      });
-      return result;
-  }
-
-  var linkRegid = getJsonFromUrl().regId;
-  if (linkRegid)
-  {
-      alert("REGID=" + linkRegid);
-  }
-  else
-  {
-      alert("NO REGID");
-  }
-
-
   function guestLogin() {
     var avatarLs = ["bat", "devil", "mike", "scream", "squash"];
     var rand = Math.floor(Math.random() * 5);
